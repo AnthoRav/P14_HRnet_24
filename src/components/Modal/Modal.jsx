@@ -1,34 +1,27 @@
 import React from 'react';
-import { Modal, Box, Typography, Button } from '@mui/material';
+import PropTypes from 'prop-types';
+import Modal from 'vite-modal-library';
+import './modal.css'
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+function ModalVite({ isOpen, onClose}) {
 
-export default function SuccessModal({ open, handleClose }) {
+
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
-    >
-      <Box sx={style}>
-        <Typography id="modal-title" variant="h6" component="h2">
-          Employé ajouté avec succès
-        </Typography>
-        <Button onClick={handleClose} sx={{ mt: 2 }}>
-          Fermer
-        </Button>
-      </Box>
-    </Modal>
+    <div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <h2>Employé ajouté avec succès</h2>
+        <div className="wrapper"> <svg className="animated-check" viewBox="0 0 24 24">
+          <path d="M4.1 12.7L9 17.6 20.3 6.3" fill="none" /> </svg>
+        </div>
+        <p>Votre employé a été enregistré dans la base de données.</p>
+      </Modal>
+    </div>
   );
 }
+
+export default ModalVite;
+
+ModalVite.propTypes = {
+  isOpen: PropTypes.bool.isRequired,  // Vérifie que isOpen est un booléen obligatoire
+  onClose: PropTypes.func.isRequired, // Vérifie que onClose est une fonction obligatoire
+};

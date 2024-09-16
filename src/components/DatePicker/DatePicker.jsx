@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -50,3 +51,9 @@ export default function DatePickerValue({ fieldName, formData, setFormData }) {
     </div>
   );
 }
+
+DatePickerValue.propTypes = {
+  fieldName: PropTypes.string.isRequired, // Nom du champ de formulaire lié à la date
+  formData: PropTypes.object.isRequired,  // Objet formData contenant les données du formulaire
+  setFormData: PropTypes.func.isRequired  // Fonction pour mettre à jour formData
+};

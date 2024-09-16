@@ -5,12 +5,10 @@ import Employee from './pages/Employee/Employee';
 import NotFound from './pages/NotFound/NotFound';
 import { EmployeeProvider } from './utils/EmployeeContext';
 
-//import './App.css'
-
 function App() {
 
   return (
-    <>
+    
       <div>
         <EmployeeProvider>
           <Header />
@@ -21,7 +19,7 @@ function App() {
           </Routes>
         </EmployeeProvider>
       </div>  
-    </>
+    
   )
 }
 

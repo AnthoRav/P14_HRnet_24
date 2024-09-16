@@ -2,7 +2,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 30px;
+  margin: 30px 60px;
+  padding: 10px 30px;
+  background-color: white;
+  border-radius: 20px;
 }
 h1 {
   font-size: 46px;
@@ -10,5 +13,51 @@ h1 {
 .link {
   text-decoration: none;
   color: black;
-  font-size: 20px;
+  font-size: 24px;
+}
+.link:hover {
+  color: rgb(142, 172, 11);
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  header {
+    margin: 20px 30px;
+    padding: 5px 20px;
+  }
+  h1 {
+    font-size: 36px;
+  }
+  .link {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    margin: 15px 20px;
+    padding: 5px 15px;
+  }
+  h1 {
+    display: none;
+  }
+  img {
+    width: 90px;
+  }
+  .link {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 425px) {
+  header {
+    margin: 10px 15px;
+    padding: 5px 10px;
+  }
+  img {
+    width: 70px;
+  }
+  .link {
+    font-size: 18px;
+  }
 }

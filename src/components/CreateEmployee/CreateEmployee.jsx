@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { MobileStepper, Button, Typography } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import Dropdown from '../DropDown/DropDown';
@@ -6,8 +7,8 @@ import DatePickerValue from '../DatePicker/DatePicker';
 import { departments } from '../../data/departments';
 import { states } from '../../data/states';
 import { EmployeeContext } from '../../utils/EmployeeContext';
-import SuccessModal from '../Modal/Modal';
-
+import ModalVite from '../Modal/Modal';
+import 'vite-modal-library/style.css'
 import "./createemployee.css";
 
 const steps = [
@@ -16,7 +17,7 @@ const steps = [
   'Informations sur l\'entreprise'
 ];
 
-const CreateEmployee = ({ onFormSubmit }) => {
+const CreateEmployee = () => {
 
   const { addEmployee } = useContext(EmployeeContext);
   const [activeStep, setActiveStep] = useState(0);
@@ -142,11 +143,10 @@ const CreateEmployee = ({ onFormSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isStepValid) {
-      onFormSubmit(formData);
+      const newEmployee = formData;
+      addEmployee(newEmployee);
+      setOpenModal(true); // Ouvrir la modal
     }
-    const newEmployee = formData;
-    addEmployee(newEmployee);
-    setOpenModal(true); // Ouvrir la modal
   };
 
   const handleCloseModal = () => {
@@ -162,7 +162,9 @@ const CreateEmployee = ({ onFormSubmit }) => {
     department: '',
     startDate: ''
     })
-    setActiveStep(0)
+    setErrors({}); // Réinitialise les erreurs
+    setIsFieldChecked({}); // Réinitialise les champs vérifiés
+    setActiveStep(0); // Retour à la première étape
   };
 
   const getStepContent = (step) => {
@@ -171,11 +173,11 @@ const CreateEmployee = ({ onFormSubmit }) => {
         return (
           <>
             <label htmlFor="firstName">Prénom</label>
-            <input type="text" id="firstName" value={formData.firstName} onChange={handleChange} />
+            <input type="text" id="firstName" value={formData.firstName} onChange={handleChange} placeholder='Votre prénom'/>
             {isFieldChecked.firstName && errors.firstName && <span className="error">{errors.firstName}</span>}
 
             <label htmlFor="lastName">Nom</label>
-            <input type="text" id="lastName" value={formData.lastName} onChange={handleChange} />
+            <input type="text" id="lastName" value={formData.lastName} onChange={handleChange} placeholder='Votre nom'/>
             {isFieldChecked.lastName && errors.lastName && <span className="error">{errors.lastName}</span>}
 
             <label htmlFor="dateOfBirth">Date de Naissance</label>
@@ -187,11 +189,11 @@ const CreateEmployee = ({ onFormSubmit }) => {
         return (
           <>
             <label htmlFor="street">Rue</label>
-            <input type="text" id="street" value={formData.street} onChange={handleChange} />
+            <input type="text" id="street" value={formData.street} onChange={handleChange} placeholder='Votre adresse'/>
             {isFieldChecked.street && errors.street && <span className="error">{errors.street}</span>}
 
             <label htmlFor="city">Ville</label>
-            <input type="text" id="city" value={formData.city} onChange={handleChange} />
+            <input type="text" id="city" value={formData.city} onChange={handleChange} placeholder='Votre ville'/>
             {isFieldChecked.city && errors.city && errors.city && <span className="error">{errors.city}</span>}
 
             <Dropdown
@@ -203,7 +205,7 @@ const CreateEmployee = ({ onFormSubmit }) => {
             />
 
             <label htmlFor="zipCode">Code Postal</label>
-            <input type="text" id="zipCode" value={formData.zipCode} onChange={handleChange} />
+            <input type="text" id="zipCode" value={formData.zipCode} onChange={handleChange} placeholder='Votre code postal'/>
             {isFieldChecked.zipCode && errors.zipCode && <span className="error">{errors.zipCode}</span>}
           </>
         );
@@ -231,7 +233,7 @@ const CreateEmployee = ({ onFormSubmit }) => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-      <Typography variant="h6" gutterBottom>{steps[activeStep]}</Typography>
+      <Typography className='step' variant="h6" gutterBottom>{steps[activeStep]} </Typography>
         {getStepContent(activeStep)}
         <MobileStepper className='stepper'
           variant="dots"
@@ -246,23 +248,19 @@ const CreateEmployee = ({ onFormSubmit }) => {
             ) : (
               <Button size="small" type="button" onClick={handleNext} disabled={!isStepValid}>
                 Suivant
-                <KeyboardArrowRight sx={{color: '#EAEAEA'
-            }}/>
+                <KeyboardArrowRight/>
               </Button>
             )
           }
           backButton={
-            <Button size="small" type="button" onClick={handleBack} disabled={activeStep === 0} sx={{color: '#EAEAEA'
-            }}>
-              <KeyboardArrowLeft sx={{color: '#EAEAEA'
-            }}/>
+            <Button size="small" type="button" onClick={handleBack} disabled={activeStep === 0}>
+              <KeyboardArrowLeft/>
               Retour
             </Button>
           }
-          sx={{backgroundColor: '#624AD0'
-           }}
+          sx={{backgroundColor: '#EAEAEA', border:'1px solid rgba(109, 131, 9, 0.726)'}}
         />
-        <SuccessModal open={openModal} handleClose={handleCloseModal} />
+       <ModalVite isOpen={openModal} onClose={handleCloseModal} />
       </form>
     </div>
   );

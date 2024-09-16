@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './dropdown.css'
 
@@ -18,3 +19,11 @@ const Dropdown = ({ label, id, options, value, onChange }) => {
 };
 
 export default Dropdown;
+
+Dropdown.propTypes = {
+  label: PropTypes.string.isRequired,     // Le label du dropdown
+  id: PropTypes.string.isRequired,        // L'ID unique pour le dropdown
+  options: PropTypes.arrayOf(PropTypes.string).isRequired, // Liste des options (tableau de chaînes de caractères)
+  value: PropTypes.string.isRequired,     // La valeur sélectionnée
+  onChange: PropTypes.func.isRequired     // Fonction pour gérer le changement de valeur
+};

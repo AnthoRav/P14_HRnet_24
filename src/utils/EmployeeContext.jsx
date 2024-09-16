@@ -10,8 +10,12 @@ export const EmployeeProvider = ({ children }) => {
     setEmployees([...employees, employee]);
   };
 
+  const removeEmployee = (employeeIndex) => {
+    setEmployees(employees.filter((_, index) => index !== employeeIndex));
+  };
+
   return (
-    <EmployeeContext.Provider value={{ employees, addEmployee }}>
+    <EmployeeContext.Provider value={{ employees, addEmployee, removeEmployee }}>
       {children}
     </EmployeeContext.Provider>
   );
