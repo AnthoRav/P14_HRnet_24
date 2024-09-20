@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
@@ -184,7 +184,6 @@ function EnhancedTableToolbar(props) {
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
-            {/* <FilterListIcon /> */}
           </IconButton>
         </Tooltip>
       )}
@@ -288,6 +287,17 @@ export default function EnhancedTable() {
       );
     }, [filteredData, order, orderBy, page, rowsPerPage]); // On recalcul le résultat chaque fois que ces dépendances changent
 
+    const textFieldStyle = {
+      marginBottom: '20px',
+      backgroundColor: '#ffff',
+      borderRadius: '5px',
+    }
+    const paperStyle = {
+      width: '100%',
+      mb: 2,
+      border: '1px solid #9cb52f',
+    }
+
   return (
     
     <Box sx={{ width: '100%' }}>
@@ -297,9 +307,9 @@ export default function EnhancedTable() {
         variant="outlined"
         value={searchTerm}
         onChange={handleSearchChange}
-        style={{ marginBottom: '20px', backgroundColor: '#ffff', borderRadius: '5px'}}
+        style={textFieldStyle}
       />
-      <Paper sx={{ width: '100%', mb: 2, border: '1px solid #9cb52f'}}>
+      <Paper sx={paperStyle}>
         <EnhancedTableToolbar numSelected={selected.length} selected={selected} setSelected={setSelected} removeEmployee={removeEmployee}/>
         
         <TableContainer>

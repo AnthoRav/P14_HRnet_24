@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { MobileStepper, Button, Typography } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
@@ -7,7 +7,7 @@ import DatePickerValue from '../DatePicker/DatePicker';
 import { departments } from '../../data/departments';
 import { states } from '../../data/states';
 import { EmployeeContext } from '../../utils/EmployeeContext';
-import ModalVite from '../Modal/Modal';
+const ModalVite = React.lazy(() => import('../Modal/Modal'));
 import 'vite-modal-library/style.css'
 import "./createemployee.css";
 
@@ -230,10 +230,16 @@ const CreateEmployee = () => {
     }
   };
 
+  const stepperStyle = {
+    backgroundColor: '#EAEAEA',
+    border:'1px solid rgba(109, 131, 9, 0.726)',
+  }
+
   return (
+    <Suspense fallback={<div>Chargement...</div>}>
     <div className="container">
       <form onSubmit={handleSubmit}>
-      <Typography className='step' variant="h6" gutterBottom>{steps[activeStep]} </Typography>
+      <Typography variant="h6" gutterBottom>{steps[activeStep]} </Typography>
         {getStepContent(activeStep)}
         <MobileStepper className='stepper'
           variant="dots"
@@ -258,11 +264,12 @@ const CreateEmployee = () => {
               Retour
             </Button>
           }
-          sx={{backgroundColor: '#EAEAEA', border:'1px solid rgba(109, 131, 9, 0.726)'}}
+          sx={stepperStyle}
         />
        <ModalVite isOpen={openModal} onClose={handleCloseModal} />
       </form>
     </div>
+    </Suspense>
   );
 };
 
