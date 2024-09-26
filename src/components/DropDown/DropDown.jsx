@@ -8,6 +8,9 @@ const Dropdown = ({ label, id, options, value, onChange }) => {
     <div>
       <label htmlFor={id}>{label}</label>
       <select id={id} value={value} onChange={onChange}>
+      <option value="" disabled>
+          Sélectionnez un {label}
+        </option>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

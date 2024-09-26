@@ -1,0 +1,102 @@
+.table-container {
+  width: 100%;
+  margin-bottom: 40px;
+  overflow-x: auto;
+  overflow: hidden;
+}
+
+.search-input {
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 300px;
+  background-color: #f0f0f0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #9cb52f;
+  white-space: nowrap;
+  min-width: 1200px;
+}
+.table-head {
+  text-align: left;
+  width: 100%;
+  position: sticky;
+}
+.table-head th {
+  font-weight: bold;
+  background-color: #A6BC43;
+  padding: 15px 5px;
+}
+
+.table-body .table-row {
+  cursor: pointer;
+}
+
+.table-body .table-row:hover {
+  background-color: #52c048;
+}
+.table-body {
+  background-color: #f0f0f0;
+}
+.table-body .selected-row {
+  background-color: #38721d;
+}
+.table-body td {
+  padding: 8px 5px;
+}
+.checkbox {
+  margin-left: 5px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.delete-button {
+  height: 45px;
+  background-color: #d11717;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+.pagination-controls label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rows-per-page-select {
+  padding-inline: 2px;
+  font-size: 14px;
+  width: auto;
+  height: 38px;
+  background-color: #f0f0f0;
+  margin-left: 10px;
+}
+
+.pagination-button {
+  padding: 0;
+  background-color: #A6BC43;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.pagination-button:disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+}

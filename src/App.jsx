@@ -1,8 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Home from './pages/Home/Home';
-import Employee from './pages/Employee/Employee';
-import NotFound from './pages/NotFound/NotFound';
+import Router from './router.jsx';
+
 import { EmployeeProvider } from './utils/EmployeeContext';
 
 function App() {
@@ -12,11 +10,7 @@ function App() {
       <div>
         <EmployeeProvider>
           <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/employees" element={<Employee />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Router />
         </EmployeeProvider>
       </div>  
     

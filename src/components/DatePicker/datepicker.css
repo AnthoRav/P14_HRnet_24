@@ -6,3 +6,24 @@
 .datepicker-input {
  border-radius: 10px;
 }
+
+.date-picker-container {
+}
+
+.date-picker-input {
+  padding: 18px;
+  font-size: 16px;
+  border-radius: 10px;
+  width: 224px;
+}
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media (max-width: 320px) {
+  .date-picker-input {
+    width: 204px;
+  }
+}

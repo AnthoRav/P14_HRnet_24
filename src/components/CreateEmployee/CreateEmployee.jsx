@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { MobileStepper, Button, Typography } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import Dropdown from '../DropDown/DropDown';
-import DatePickerValue from '../DatePicker/DatePicker';
+//import DatePickerValue from '../DatePicker/DatePicker';
+import DatePicker from '../DatePicker/DatePickerNative';
 import { departments } from '../../data/departments';
 import { states } from '../../data/states';
 import { EmployeeContext } from '../../utils/EmployeeContext';
@@ -101,6 +102,10 @@ const CreateEmployee = () => {
           stepErrors.lastName = 'Nom invalide';
           isValid = false;
         }
+        if (!formData.dateOfBirth) {
+          stepErrors.dateOfBirth = 'Date de naissance invalide';
+          isValid = false;
+        }
         break;
       case 1:
         if (!regexPatterns.street.test(formData.street)) {
@@ -111,8 +116,20 @@ const CreateEmployee = () => {
           stepErrors.city = 'Ville invalide';
           isValid = false;
         }
+        if (formData.state === "") {
+          isValid = false; // L'utilisateur doit choisir un état
+        }
         if (!regexPatterns.zipCode.test(formData.zipCode)) {
           stepErrors.zipCode = 'Code postal invalide';
+          isValid = false;
+        }
+        break;
+      case 2:
+        if (formData.department === "") {
+          isValid = false; // L'utilisateur doit choisir un département
+        }
+        if (!formData.startDate) {
+          stepErrors.startDate = 'Date de début invalide';
           isValid = false;
         }
         break;
@@ -181,7 +198,8 @@ const CreateEmployee = () => {
             {isFieldChecked.lastName && errors.lastName && <span className="error">{errors.lastName}</span>}
 
             <label htmlFor="dateOfBirth">Date de Naissance</label>
-            <DatePickerValue fieldName="dateOfBirth" formData={formData} setFormData={setFormData}/>
+            {/* <DatePickerValue fieldName="dateOfBirth" formData={formData} setFormData={setFormData}/> */}
+            <DatePicker fieldName="dateOfBirth" formData={formData} setFormData={setFormData} validationType="birthdate"/>
 
           </>
         );
@@ -221,7 +239,8 @@ const CreateEmployee = () => {
             />
 
             <label htmlFor='startDate'>Start Date</label>
-            <DatePickerValue fieldName="startDate" formData={formData} setFormData={setFormData}/>
+            {/* <DatePickerValue fieldName="startDate" formData={formData} setFormData={setFormData}/> */}
+            <DatePicker fieldName="startDate" formData={formData} setFormData={setFormData} validationType="startdate"/>
 
           </>
         );
@@ -239,7 +258,8 @@ const CreateEmployee = () => {
     <Suspense fallback={<div>Chargement...</div>}>
     <div className="container">
       <form onSubmit={handleSubmit}>
-      <Typography variant="h6" gutterBottom>{steps[activeStep]} </Typography>
+      {/* <Typography variant="h6" gutterBottom>{steps[activeStep]} </Typography> */}
+      <h3>{steps[activeStep]}</h3>
         {getStepContent(activeStep)}
         <MobileStepper className='stepper'
           variant="dots"

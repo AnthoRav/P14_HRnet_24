@@ -18,9 +18,15 @@ label {
 form {
   display: flex;
   flex-direction: column;
+  width: 260px;
   padding: 40px;
   background-color:#EAEAEA;
   border-radius: 10px;
+}
+form h3 {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 0;
 }
 .form_btn {
   display: flex;
@@ -47,6 +53,10 @@ input {
 
 @media (max-width: 320px) {
   form {
+    width: 240px;
     padding: 30px;
+  }
+  form h3 {
+    font-size: 18px;
   }
 }
