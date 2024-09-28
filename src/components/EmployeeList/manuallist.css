@@ -2,7 +2,6 @@
   width: 100%;
   margin-bottom: 40px;
   overflow-x: auto;
-  overflow: hidden;
 }
 
 .search-input {
@@ -69,13 +68,15 @@
 
 .pagination-controls {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
 }
 .pagination-controls label {
   font-size: 14px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin: 0;
 }
 
 .rows-per-page-select {
@@ -86,10 +87,17 @@
   background-color: #f0f0f0;
   margin-left: 10px;
 }
-
+.pagination-button-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.page-info {
+  font-size: 14px;
+}
 .pagination-button {
   padding: 0;
-  background-color: #A6BC43;
+  background-color: transparent;
   border: none;
   color: black;
   cursor: pointer;
@@ -99,4 +107,8 @@
 .pagination-button:disabled {
   background-color: transparent;
   cursor: not-allowed;
+}
+.sort-icon {
+  margin-left: 5px;
+  font-size: 14px;
 }

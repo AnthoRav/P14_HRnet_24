@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { MobileStepper, Button, Typography } from '@mui/material';
+import { MobileStepper, Button } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import Dropdown from '../DropDown/DropDown';
 //import DatePickerValue from '../DatePicker/DatePicker';

@@ -2,7 +2,7 @@ import React, { useContext, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { EmployeeContext } from '../../utils/EmployeeContext';
 import { useSearch } from '../../utils/useSearch';
-import './manuallist.css'; // Importation du fichier CSS
+import './manuallist.css';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,6 +68,9 @@ function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowC
             className="table-cell sortable-cell"
           >
             {headCell.label}
+              <span className="sort-icon">
+                {order === 'desc' ? ' ↓' : ' ↑'}
+              </span>
           </th>
         ))}
       </tr>
@@ -238,6 +241,7 @@ export default function EnhancedTable() {
       </table>
 
       <div className="pagination-controls">
+        <span>Nombre d'employés : {filteredData.length}</span>
         <div>
           <label>
             Lignes par page :
@@ -250,12 +254,15 @@ export default function EnhancedTable() {
             </select>
           </label>
         </div>
-        <button onClick={() => handleChangePage(page - 1)} disabled={page === 0} className="pagination-button">
-        &lt; {/* Signe "<" */}
-        </button>
-        <button onClick={() => handleChangePage(page + 1)} disabled={page >= Math.ceil(employees.length / rowsPerPage) - 1} className="pagination-button">
-       &gt; {/* Signe ">" */}
-        </button>
+        <div className='pagination-button-group'>
+        <span className='page-info'>Page {page + 1} sur {Math.ceil(employees.length / rowsPerPage)}</span>
+          <button onClick={() => handleChangePage(page - 1)} disabled={page === 0} className="pagination-button">
+          &lt; {/* Signe "<" */}
+          </button>
+          <button onClick={() => handleChangePage(page + 1)} disabled={page >= Math.ceil(employees.length / rowsPerPage) - 1} className="pagination-button">
+          &gt; {/* Signe ">" */}
+          </button>
+        </div>
       </div>
     </div>
   );
